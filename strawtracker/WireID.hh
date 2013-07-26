@@ -7,8 +7,10 @@
 // structure study for tracking software), but a naive struct. Expansion to a
 // smart struct is anticipated to be fairly straightforward.
 //
-// TODO: Add #ifndef gccxml things so that ROOT doesn't hate our guts. Though
-// come to think of it, it probably still will.
+// For now, this is a pretty long header file without a corresponding *.cc file.
+// This is so that other classes can #include it without having to alter their
+// CMakeLists.txt to link against gm2dataproducts_strawtracker, but could change
+// in the future.
 
 // @author Tasha Arvanitis
 // @date July 2013
@@ -18,6 +20,9 @@
 #define WIREID_HH
 
 #include <ostream>
+#include <string>
+
+#include "messagefacility/MessageLogger/MessageLogger.h"
 
 // All in the namespace for straw tracking
 namespace gm2strawtracker {
@@ -57,13 +62,14 @@ namespace gm2strawtracker {
         short wire;
 
         public:
-        // Constructor initializes everything
+        // Constructor initializes everything to -1 - set the fields you care
+        // about!
         WireID() :
-            trackerNumber(0),
-            station(0),
+            trackerNumber(-1),
+            station(-1),
             view(na_view),
-            layer(0),
-            wire(0)
+            layer(-1),
+            wire(-1)
         {}
         
         // ROOT shouldn't see these
@@ -113,12 +119,13 @@ namespace gm2strawtracker {
 
     // ROOT shouldn't see these things.
 #ifndef __GCCXML__
-    // The printing function for ease of debugging: tracker number - station -
-    // view - layer - wire
+    // The printing function for ease of debugging: tracker number ~ station ~
+    // view ~ layer ~ wire (Use tilde separation instead of '-' in order to
+    // avoid confusion with negative numbers)
     std::ostream& operator<<(std::ostream& os, const WireID& id) {
-        os << id.trackerNumber << " - " << id.station << " - " << id.view
+        os << id.trackerNumber << " ~ " << id.station << " ~ " << id.view
             //id.view == u_view ? "u" : (id.view == v_view ? "v" : "na")
-            << " - " << id.layer << " - " << id.wire;
+            << " ~ " << id.layer << " ~ " << id.wire;
         return os;
     }
 
@@ -149,8 +156,93 @@ namespace gm2strawtracker {
         // no two keys will ever look the same!
         return false;
     }
-#endif // __GCCXML__
 
+    // Code modified from stackoverflow question 236129. This function takes a
+    // string and a string containing delimiters as arguments and returns a
+    // vector of the tokens resulting from such a split. 
+    std::vector<std::string> split(const std::string& str, const std::string& delimiters)
+    {
+        std::vector<std::string> tokens;
+
+        // Skip delimiters at beginning.
+        std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
+        // Find first "non-delimiter".
+        std::string::size_type pos     = str.find_first_of(delimiters, lastPos);
+
+        while (std::string::npos != pos || std::string::npos != lastPos)
+        {
+            // Found a token, add it to the vector.
+            tokens.push_back(str.substr(lastPos, pos - lastPos));
+            // Skip delimiters.  Note the "not_of"
+            lastPos = str.find_first_not_of(delimiters, pos);
+            // Find next "non-delimiter"
+            pos = str.find_first_of(delimiters, lastPos);
+        }
+
+        return tokens;
+    }
+
+    // Check if a string is a positive integer (all the fields should be!)
+    bool is_number(const std::string& s)
+    {
+        std::string::const_iterator it = s.begin();
+        while (it != s.end() && std::isdigit(*it)) {
+            ++it;
+        }
+        return !s.empty() && it == s.end();
+    }
+
+    // A construction function to reconstruct a WireID based on its standard
+    // name (as provided in operator<<) - needed for WireID specification to be
+    // linked to specific volumes in Geant. If an invalid string of some sort is
+    // provided (not enough tokens, some tokens either empty or not numbers,
+    // etc.), then an error message is printed and the WireID returned is filled
+    // with -1's.
+    WireID wireIDfromString(std::string str) {
+        // Based on the output format in operator<<, the delimiters we want are
+        // '~' and ' ' (space). Split the string.
+        std::vector<std::string> tokens = split(str, "~ ");
+
+        // Create the WireID - by default, it has invalid parameters.
+        WireID wire;
+
+        // Error checking 
+        // Check that it's long enough.
+        if (tokens.size() != 5) {
+            mf::LogError("WireID") 
+                << "Wrong number of tokens in conversion from string" 
+                << " to WireID!! Returning invalid WireID." << std::endl;
+
+            return wire;
+        }
+        // Check that the tokens are actually positive integers. This doesn't
+        // check that the tokens fall in the appropriate ranges, as it isn't
+        // linked to the geometry description.
+        for (size_t i = 0; i < tokens.size(); i++) {
+            if (!is_number(tokens[i])) {
+                // Not a number: return the invalid (default) WireID
+                mf::LogError("WireID") 
+                    << "One or more tokens provided for conversion to "
+                    << "WireID not numeric!! Returning invalid WireID." << std::endl;
+                return wire;
+            }
+        }
+
+        // Once we reach this point, we appear to have a valid string. Let's now
+        // fill the WireID based on the tokens
+        wire.setTrackerNumber(atoi(tokens[0].c_str()));
+        wire.setStation(atoi(tokens[1].c_str()));
+        // The view is moderately complicated - I'm hoping to change the
+        // printout to actually say 'u' or 'v', rather than '0' or '1'.
+        int viewInt = atoi(tokens[2].c_str());
+        wire.setView(viewInt == 0 ? u_view : 
+                (viewInt == 1 ? v_view : na_view));
+        wire.setLayer(atoi(tokens[3].c_str()));
+        wire.setWire(atoi(tokens[4].c_str()));
+
+        return wire;
+    }
+#endif // __GCCXML__
 }
 
 #endif
