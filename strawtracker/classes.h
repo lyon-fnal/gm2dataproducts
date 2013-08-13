@@ -6,7 +6,6 @@
 
 #include "art/Persistency/Common/Wrapper.h"
 #include "TrackerHitArtRecord.hh"
-#include "TrackerGeomHitArtRecord.hh"
 #include "FittedTrackArtRecord.hh"
 #include "WireID.hh"
 
@@ -21,8 +20,8 @@ template class std::vector< gm2strawtracker::TrackerHitArtRecord >;
 template class art::Wrapper< gm2strawtracker::TrackerHitArtRecordCollection >;
 
 // For the vector of art::Ptr's
-template class art::Ptr<gm2strawtracker::TrackerGeomHitArtRecord>;
-template class std::vector<art::Ptr<gm2strawtracker::TrackerGeomHitArtRecord> >;
+template class art::Ptr<gm2strawtracker::TrackerHitArtRecord>;
+template class std::vector<art::Ptr<gm2strawtracker::TrackerHitArtRecord> >;
 
 // And for the vector of booleans
 template class std::vector<bool>;

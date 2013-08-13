@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "art/Persistency/Common/Ptr.h"
-#include "TrackerGeomHitArtRecord.hh"
+#include "TrackerHitArtRecord.hh"
 #include "CLHEP/Vector/ThreeVector.h"
 
 namespace gm2strawtracker {
@@ -159,7 +159,7 @@ namespace gm2strawtracker {
 
         // The collection of pointers (safe for storing and retrieving) to the
         // hits in this track [candidate].
-        std::vector<art::Ptr<TrackerGeomHitArtRecord> > hits;
+        std::vector<art::Ptr<TrackerHitArtRecord> > hits;
 
         // Helix parameters (defined and described above)
         HelixParameters helix_fit;
@@ -202,7 +202,7 @@ namespace gm2strawtracker {
 #ifndef __GCCXML__
         
         FittedTrackArtRecord(
-                std::vector<art::Ptr<TrackerGeomHitArtRecord> > hits_, 
+                std::vector<art::Ptr<TrackerHitArtRecord> > hits_, 
                 HelixParameters helix_fit_,
                 LineParameters line_fit_,
                 bool isHelix_, bool isLine_,

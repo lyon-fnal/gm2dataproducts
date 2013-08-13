@@ -20,8 +20,8 @@
     <class name="gm2strawtracker::LineParameters"/>
     
     <!-- For the vector of Ptrs - note that using the typedef will not work here-->
-    <class name="art::Ptr<gm2strawtracker::TrackerGeomHitArtRecord>"/>
-    <class name="std::vector<art::Ptr<gm2strawtracker::TrackerGeomHitArtRecord> >"/>
+    <class name="art::Ptr<gm2strawtracker::TrackerHitArtRecord>"/>
+    <class name="std::vector<art::Ptr<gm2strawtracker::TrackerHitArtRecord> >"/>
 
     <!-- For the vector of booleans -->
     <class name="std::vector<bool>"/>
