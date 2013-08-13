@@ -13,8 +13,6 @@
 // For WireID
 // Template the vector (no typedef)
 template class std::vector< gm2strawtracker::WireID >;
-// Template the wrapper for the vector (typedef okay)
-template class art::Wrapper< gm2strawtracker::WireID >;
 
 // For TrackerHits
 // Template the vector (no typedef)
@@ -22,15 +20,13 @@ template class std::vector< gm2strawtracker::TrackerHitArtRecord >;
 // Template the wrapper for the vector (typedef okay)
 template class art::Wrapper< gm2strawtracker::TrackerHitArtRecordCollection >;
 
-// For TrackerGeomHits
-// Template the vector (no typedef)
-template class std::vector< gm2strawtracker::TrackerGeomHitArtRecord >;
-// Template the wrapper for the vector (typedef okay)
-template class art::Wrapper< gm2strawtracker::TrackerGeomHitArtRecordCollection >;
+// For the vector of art::Ptr's
+template class art::Ptr<gm2strawtracker::TrackerGeomHitArtRecord>;
+template class std::vector<art::Ptr<gm2strawtracker::TrackerGeomHitArtRecord> >;
 
-// For FittedTracks
-// Template the vector (no typedef)
-template class std::vector< gm2strawtracker::FittedTrackArtRecord >;
-// Template the wrapper for the vector (typedef okay)
-template class art::Wrapper< gm2strawtracker::FittedTrackArtRecordCollection >;
+// And for the vector of booleans
+template class std::vector<bool>;
 
+// For FittedTracks 
+// Make a wrapper for just the fitted track, not just for the collection.
+template class art::Wrapper< gm2strawtracker::FittedTrackArtRecord >;
