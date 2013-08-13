@@ -74,6 +74,27 @@ namespace gm2strawtracker {
         
         // ROOT shouldn't see these
 #ifndef __GCCXML__
+        // Two other constructors, which ROOT can't see but other classes
+        // can.
+        // An easy constructor - just pass in all the relevant information
+        WireID(short trackerNumber_in, short station_in, StrawView view_in,
+                short layer_in, short wire_in)
+            : trackerNumber(trackerNumber_in),
+              station(station_in),
+              view(view_in),
+              layer(layer_in),
+              wire(wire_in)
+        {}
+
+        // A copy constructor
+        WireID(const WireID& other)
+            : trackerNumber(other.trackerNumber),
+              station(other.station),
+              view(other.view),
+              layer(other.layer),
+              wire(other.wire)
+        {}
+
         // For the sake of future expansion to a smart struct, access to the
         // fields is through methods. Names are self-explanatory, and the
         // methods are simple enough to put in here. Should they be inlined?
