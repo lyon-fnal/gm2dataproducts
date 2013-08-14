@@ -35,6 +35,10 @@ namespace gm2strawtracker {
         // Location (in tracking coordinates) of the center of the straw
         CLHEP::Hep3Vector centerLocation;
 
+        // u or v of the straw (only applicable as the u-coordinate for u
+        // straws, and as the v-coordinate for v straws)
+        double uv;
+
         // T0, in ns, and drift distance, in mm.
         double t0;
         double driftDistance;
@@ -54,14 +58,15 @@ namespace gm2strawtracker {
         // A nicer constructor: ROOT doesn't see it, but other classes can.
 #ifndef __GCCXML__
         TrackerHitArtRecord(WireID inid, double intime, double inwidth, 
-                int inindex, bool inerrorFlag, CLHEP::Hep3Vector incenterLoc,
-                double int0, double indriftDistance) :
+                int inindex, bool inerrorFlag, CLHEP::Hep3Vector incenterLoc, 
+                double inuv, double int0, double indriftDistance) :
             id(inid),
             time(intime),
             width(inwidth),
             index(inindex),
             errorFlag(inerrorFlag),
             centerLocation(incenterLoc),
+            uv(inuv),
             t0(int0),
             driftDistance(indriftDistance)
         {}
@@ -74,6 +79,7 @@ namespace gm2strawtracker {
             index(other.index),
             errorFlag(other.errorFlag),
             centerLocation(other.centerLocation),
+            uv(other.uv),
             t0(other.t0),
             driftDistance(other.driftDistance)
         {}
