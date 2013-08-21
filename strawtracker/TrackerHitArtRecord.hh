@@ -39,8 +39,9 @@ namespace gm2strawtracker {
         // straws, and as the v-coordinate for v straws)
         double uv;
 
-        // T0, in ns, and drift distance, in mm.
+        // T0, in ns, the drift time, in ns, and drift distance, in mm.
         double t0;
+        double driftTime;
         double driftDistance;
 
         // Default constructor
@@ -52,6 +53,7 @@ namespace gm2strawtracker {
             errorFlag(false),
             centerLocation(0., 0., 0.),
             t0(0.),
+            driftTime(0.),
             driftDistance(0.)
         {}
 
@@ -59,7 +61,8 @@ namespace gm2strawtracker {
 #ifndef __GCCXML__
         TrackerHitArtRecord(WireID inid, double intime, double inwidth, 
                 int inindex, bool inerrorFlag, CLHEP::Hep3Vector incenterLoc, 
-                double inuv, double int0, double indriftDistance) :
+                double inuv, double int0, double indriftTime,
+                double indriftDistance) :
             id(inid),
             time(intime),
             width(inwidth),
@@ -68,6 +71,7 @@ namespace gm2strawtracker {
             centerLocation(incenterLoc),
             uv(inuv),
             t0(int0),
+            driftTime(indriftTime),
             driftDistance(indriftDistance)
         {}
 
@@ -81,6 +85,7 @@ namespace gm2strawtracker {
             centerLocation(other.centerLocation),
             uv(other.uv),
             t0(other.t0),
+            driftTime(other.driftTime),
             driftDistance(other.driftDistance)
         {}
 #endif // __GCCXML__

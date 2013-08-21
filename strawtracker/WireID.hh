@@ -6,11 +6,6 @@
 // For now, it is not a 'smart struct' as suggested in docDB entry 1153 (Data
 // structure study for tracking software), but a naive struct. Expansion to a
 // smart struct is anticipated to be fairly straightforward.
-//
-// For now, this is a pretty long header file without a corresponding *.cc file.
-// This is so that other classes can #include it without having to alter their
-// CMakeLists.txt to link against gm2dataproducts_strawtracker, but could change
-// in the future.
 
 // @author Tasha Arvanitis
 // @date July 2013
@@ -62,15 +57,8 @@ namespace gm2strawtracker {
         short wire;
 
         public:
-        // Constructor initializes everything to -1 - set the fields you care
-        // about!
-        WireID() :
-            trackerNumber(-1),
-            station(-1),
-            view(na_view),
-            layer(-1),
-            wire(-1)
-        {}
+        // Constructors
+        WireID();
         
         // ROOT shouldn't see these
 #ifndef __GCCXML__
@@ -78,193 +66,78 @@ namespace gm2strawtracker {
         // can.
         // An easy constructor - just pass in all the relevant information
         WireID(short trackerNumber_in, short station_in, StrawView view_in,
-                short layer_in, short wire_in)
-            : trackerNumber(trackerNumber_in),
-              station(station_in),
-              view(view_in),
-              layer(layer_in),
-              wire(wire_in)
-        {}
+                short layer_in, short wire_in);
 
         // A copy constructor
-        WireID(const WireID& other)
-            : trackerNumber(other.trackerNumber),
-              station(other.station),
-              view(other.view),
-              layer(other.layer),
-              wire(other.wire)
-        {}
+        WireID(const WireID& other);
 
         // For the sake of future expansion to a smart struct, access to the
         // fields is through methods. Names are self-explanatory, and the
         // methods are simple enough to put in here. Should they be inlined?
         // Getters
-        short getTrackerNumber() const {
+        inline short getTrackerNumber() const {
             return trackerNumber;
         }
-        short getStation() const {
+        inline short getStation() const {
             return station;
         }
-        StrawView getView() const {
+        inline StrawView getView() const {
             return view;
         }
-        short getLayer() const {
+        inline short getLayer() const {
             return layer;
         }
-        short getWire() const {
+        inline short getWire() const {
             return wire;
         }
 
         // Setters
-        void setTrackerNumber(short newValue) {
+        inline void setTrackerNumber(short newValue) {
             trackerNumber = newValue;
         }
-        void setStation(short newValue) {
+        inline void setStation(short newValue) {
             station = newValue;
         }
-        void setView(StrawView newValue) {
+        inline void setView(StrawView newValue) {
             view = newValue;
         }
-        void setLayer(short newValue) {
+        inline void setLayer(short newValue) {
             layer = newValue;
         }
-        void setWire(short newValue) {
+        inline void setWire(short newValue) {
             wire = newValue;
         }
 
-        // Print information about the tracker
+        
+        // A useful function for splitting strings on various delimiters
+        static std::vector<std::string> split(const std::string& str, 
+                const std::string& delimiters);
+        // Method to check if a string is a positive integer (all the
+        // fields should be!)
+        static bool is_number(const std::string& s);
+
+        // Give special functions access to the member data
         friend std::ostream& operator<<(std::ostream& os, const WireID& id);
+        friend bool operator<(WireID const& left, WireID const& right);
 #endif // __GCCXML__
 
     };
 
-    // ROOT shouldn't see these things.
+    // ROOT shouldn't see the various non-member functions pertaining to
+    // WireIDs
 #ifndef __GCCXML__
-    // The printing function for ease of debugging: tracker number ~ station ~
-    // view ~ layer ~ wire (Use tilde separation instead of '-' in order to
-    // avoid confusion with negative numbers)
-    std::ostream& operator<<(std::ostream& os, const WireID& id) {
-        os << id.trackerNumber << " ~ " << id.station << " ~ " << id.view
-            //id.view == u_view ? "u" : (id.view == v_view ? "v" : "na")
-            << " ~ " << id.layer << " ~ " << id.wire;
-        return os;
-    }
+    // A printing function for the WireID
+    std::ostream& operator<<(std::ostream& os, const WireID& id);
 
     // A comparison function for the WireID, so that it can be sorted. This is
     // also essential in order to use a WireID as a key in a std::map.
-    inline bool operator<(WireID const& left, WireID const& right) {
-        // Compare the 'most significant' things first:
-        // The order of comparison is tracker number, station, view, layer, and
-        // then wire.
-        if (left.getTrackerNumber() != right.getTrackerNumber()) {
-            return left.getTrackerNumber() < right.getTrackerNumber();
-        }
-        if (left.getStation() != right.getStation()) {
-            return left.getStation() < right.getStation();
-        }
-        if (left.getView() != right.getView()) {
-            return left.getView() < right.getView();
-        }
-        if (left.getLayer() != right.getLayer()) {
-            return left.getLayer() < right.getLayer();
-        }
-        if (left.getWire() != right.getWire()) {
-            return left.getWire() < right.getWire();
-        }
-        // If we get here, we have identical WireID's, so we have to return
-        // false (WireID 1 is *not* less than WireID 2). If you return true, all
-        // hell breaks loose, because a map can't possibly find an entry, since
-        // no two keys will ever look the same!
-        return false;
-    }
+    bool operator<(WireID const& left, WireID const& right);
 
-    // Code modified from stackoverflow question 236129. This function takes a
-    // string and a string containing delimiters as arguments and returns a
-    // vector of the tokens resulting from such a split. 
-    std::vector<std::string> split(const std::string& str, const std::string& delimiters)
-    {
-        std::vector<std::string> tokens;
-
-        // Skip delimiters at beginning.
-        std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
-        // Find first "non-delimiter".
-        std::string::size_type pos     = str.find_first_of(delimiters, lastPos);
-
-        while (std::string::npos != pos || std::string::npos != lastPos)
-        {
-            // Found a token, add it to the vector.
-            tokens.push_back(str.substr(lastPos, pos - lastPos));
-            // Skip delimiters.  Note the "not_of"
-            lastPos = str.find_first_not_of(delimiters, pos);
-            // Find next "non-delimiter"
-            pos = str.find_first_of(delimiters, lastPos);
-        }
-
-        return tokens;
-    }
-
-    // Check if a string is a positive integer (all the fields should be!)
-    bool is_number(const std::string& s)
-    {
-        std::string::const_iterator it = s.begin();
-        while (it != s.end() && std::isdigit(*it)) {
-            ++it;
-        }
-        return !s.empty() && it == s.end();
-    }
-
-    // A construction function to reconstruct a WireID based on its standard
-    // name (as provided in operator<<) - needed for WireID specification to be
-    // linked to specific volumes in Geant. If an invalid string of some sort is
-    // provided (not enough tokens, some tokens either empty or not numbers,
-    // etc.), then an error message is printed and the WireID returned is filled
-    // with -1's.
-    WireID wireIDfromString(std::string str) {
-        // Based on the output format in operator<<, the delimiters we want are
-        // '~' and ' ' (space). Split the string.
-        std::vector<std::string> tokens = split(str, "~ ");
-
-        // Create the WireID - by default, it has invalid parameters.
-        WireID wire;
-
-        // Error checking 
-        // Check that it's long enough.
-        if (tokens.size() != 5) {
-            mf::LogError("WireID") 
-                << "Wrong number of tokens in conversion from string" 
-                << " to WireID!! Returning invalid WireID." << std::endl;
-
-            return wire;
-        }
-        // Check that the tokens are actually positive integers. This doesn't
-        // check that the tokens fall in the appropriate ranges, as it isn't
-        // linked to the geometry description.
-        for (size_t i = 0; i < tokens.size(); i++) {
-            if (!is_number(tokens[i])) {
-                // Not a number: return the invalid (default) WireID
-                mf::LogError("WireID") 
-                    << "One or more tokens provided for conversion to "
-                    << "WireID not numeric!! Returning invalid WireID." << std::endl;
-                return wire;
-            }
-        }
-
-        // Once we reach this point, we appear to have a valid string. Let's now
-        // fill the WireID based on the tokens
-        wire.setTrackerNumber(atoi(tokens[0].c_str()));
-        wire.setStation(atoi(tokens[1].c_str()));
-        // The view is moderately complicated - I'm hoping to change the
-        // printout to actually say 'u' or 'v', rather than '0' or '1'.
-        int viewInt = atoi(tokens[2].c_str());
-        wire.setView(viewInt == 0 ? u_view : 
-                (viewInt == 1 ? v_view : na_view));
-        wire.setLayer(atoi(tokens[3].c_str()));
-        wire.setWire(atoi(tokens[4].c_str()));
-
-        return wire;
-    }
+    // A publicly-available function to get a WireID from its string
+    // representation.
+    WireID wireIDfromString(std::string str);
 #endif // __GCCXML__
 }
 
-#endif
+#endif // WIREID_HH
 
