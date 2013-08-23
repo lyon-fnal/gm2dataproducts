@@ -91,7 +91,7 @@ bool gm2strawtracker::WireID::is_number(const std::string& s)
 // with -1's. 
 // Note: This is NOT a member function of the WireID! It's publicly
 // available to anyone who wants to use it.
-gm2strawtracker::WireID wireIDfromString(std::string str) {
+gm2strawtracker::WireID gm2strawtracker::wireIDfromString(std::string str) {
     // Based on the output format in operator<<, the delimiters we want are
     // '~' and ' ' (space). Split the string.
     std::vector<std::string> tokens = WireID::split(str, "~ ");

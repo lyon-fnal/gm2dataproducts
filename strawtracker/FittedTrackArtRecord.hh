@@ -125,29 +125,49 @@ namespace gm2strawtracker {
         // The intercept with the 'y-axis' (at z=0)
         ValueWithError intercept;
 
+        // The y-value (height) of the line, which is assumed to be in the
+        // horizontal x-z plane.
+        ValueWithError height;
+
+        // The min/max z values for which these parameters are valid.
+        double zmin;
+        double zmax;
+
         // Default constructor: all fields have default constructors that
         // set everything to zero, so we really don't have to do anything.
         // The constructor is defined here primarily for clarity's sake
         LineParameters()
           : slope(),
-            intercept()
+            intercept(),
+            height(),
+            zmin(0),
+            zmax(0)
         {}
 
         // A couple of nicer constructors: ROOT doesn't see it, but other
         // classes can.
 #ifndef __GCCXML__
         // A constructor based on fully-formed arguments
-        LineParameters(ValueWithError slope_in, ValueWithError intercept_in) 
+        LineParameters(ValueWithError slope_in, ValueWithError intercept_in,
+                ValueWithError height_in, double zmin_in, double zmax_in) 
           : slope(slope_in),
-            intercept(intercept_in)
+            intercept(intercept_in),
+            height(height_in),
+            zmin(zmin_in),
+            zmax(zmax_in)
         {}
 
         // A constructor based on individual values, so no more interesting
         // classes.
         LineParameters(double slope_val, double slope_err,
-                double intercept_val, double intercept_err) 
+                double intercept_val, double intercept_err,
+                double height_val, double height_err, double zmin_in, 
+                double zmax_in)
           : slope(slope_val, slope_err),
-            intercept(intercept_val, intercept_err)
+            intercept(intercept_val, intercept_err),
+            height(height_val, height_err),
+            zmin(zmin_in),
+            zmax(zmax_in)
         {}
         
 #endif // __GCCXML__

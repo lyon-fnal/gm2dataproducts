@@ -29,4 +29,6 @@
     <!-- For FittedTracks - note that using the typedef will not work here-->
     <class name="gm2strawtracker::FittedTrackArtRecord"/>
     <class name="art::Wrapper< gm2strawtracker::FittedTrackArtRecord >"/>
+    <class name="std::vector< gm2strawtracker::FittedTrackArtRecord >"/>
+    <class name="art::Wrapper< std::vector< gm2strawtracker::FittedTrackArtRecord > >"/>
 </lcgdict>

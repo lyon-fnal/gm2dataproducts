@@ -27,5 +27,7 @@ template class std::vector<art::Ptr<gm2strawtracker::TrackerHitArtRecord> >;
 template class std::vector<bool>;
 
 // For FittedTracks 
-// Make a wrapper for just the fitted track, not just for the collection.
+// Make a wrapper for just the fitted track, as well as for the collection.
 template class art::Wrapper< gm2strawtracker::FittedTrackArtRecord >;
+template class std::vector< gm2strawtracker::FittedTrackArtRecord >;
+template class art::Wrapper< gm2strawtracker::FittedTrackArtRecordCollection >;
