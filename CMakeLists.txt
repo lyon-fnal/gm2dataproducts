@@ -111,6 +111,8 @@ include(ArtMake)
 add_subdirectory( ups )
 add_subdirectory( test )
 add_subdirectory( strawtracker )
+add_subdirectory( calo )
+
 
 
 # Packaging facility

@@ -1,0 +1,14 @@
+<!--  art::Wrapper lines need only top level data product objects  -->
+
+<lcgdict>
+
+    <!-- For TrackerHits - note that using the typedef will not work here-->
+    <class name="gm2dataproducts::XtalHitClusterArtRecord"/>
+    <class name="std::vector< gm2dataproducts::XtalHitClusterArtRecord >"/>
+    <class name="art::Wrapper< std::vector< gm2dataproducts::XtalHitClusterArtRecord > >"/>
+    
+    <class name="art::Ptr< gm2ringsim::XtalArtRecord >"/>
+    <class name="art::PtrVector< gm2ringsim::XtalArtRecord >"/>
+    <!-- <class name="art::Wrapper<art::PtrVector< gm2ringsim::XtalArtRecord > >"/> -->
+
+</lcgdict>
