@@ -8,7 +8,7 @@
 
 namespace gm2dataproducts {
 	struct XtalHitClusterArtRecord {
-		art::PtrVector<gm2ringsim::XtalArtRecord> hits;
+		std::vector< art::Ptr<gm2ringsim::XtalArtRecord> > hits;
 		double energy;
 		double x0;
 		double y0;
@@ -25,7 +25,7 @@ namespace gm2dataproducts {
 			caloNum(-1),
 			seedXtalNum(-1) {};
 #ifndef __GCCXML__
-			XtalHitClusterArtRecord(art::PtrVector<gm2ringsim::XtalArtRecord> hits_,
+			XtalHitClusterArtRecord(std::vector<art::Ptr<gm2ringsim::XtalArtRecord> > hits_,
 									double energy_, double x0_, double y0_, double t0_,
 									int caloNum_, int seedXtalNum_) :
 				hits(hits_),

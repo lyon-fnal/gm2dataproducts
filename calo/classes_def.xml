@@ -8,7 +8,7 @@
     <class name="art::Wrapper< std::vector< gm2dataproducts::XtalHitClusterArtRecord > >"/>
     
     <class name="art::Ptr< gm2ringsim::XtalArtRecord >"/>
-    <class name="art::PtrVector< gm2ringsim::XtalArtRecord >"/>
-    <!-- <class name="art::Wrapper<art::PtrVector< gm2ringsim::XtalArtRecord > >"/> -->
+    <class name="std::vector< art::Ptr< gm2ringsim::XtalArtRecord > >"/>
+    <class name="art::Wrapper<std::vector<art::Ptr< gm2ringsim::XtalArtRecord > > >"/>
 
 </lcgdict>

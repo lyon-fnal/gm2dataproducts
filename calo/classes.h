@@ -14,4 +14,4 @@ template class art::Wrapper< gm2dataproducts::XtalHitClusterArtRecordCollection 
 
 template class art::Ptr< gm2ringsim::XtalArtRecord>;
 template class std::vector<art::Ptr< gm2ringsim::XtalArtRecord> >;
-template class art::Wrapper< art::PtrVector<gm2ringsim::XtalArtRecord> >;
+template class art::Wrapper< std::vector<art::Ptr<gm2ringsim::XtalArtRecord> > >;
