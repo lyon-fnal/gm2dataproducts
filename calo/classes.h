@@ -3,31 +3,14 @@
 //
 
 #include <vector>
-
 #include "art/Persistency/Common/Wrapper.h"
-#include "TrackerHitArtRecord.hh"
-#include "FittedTrackArtRecord.hh"
-#include "WireID.hh"
 
-// For WireID
-// Template the vector (no typedef)
-template class std::vector< gm2strawtracker::WireID >;
+#include "DigitizerSampleArtRecord.hh"
 
-// For TrackerHits
+
+// For Digitizer Sample
 // Template the vector (no typedef)
-template class std::vector< gm2strawtracker::TrackerHitArtRecord >;
+template class std::vector< gm2dataproducts::DigitizerSampleArtRecord >;
 // Template the wrapper for the vector (typedef okay)
-template class art::Wrapper< gm2strawtracker::TrackerHitArtRecordCollection >;
+template class art::Wrapper< gm2dataproducts::DigitizerSampleArtRecordCollection >;
 
-// For the vector of art::Ptr's
-template class art::Ptr<gm2strawtracker::TrackerHitArtRecord>;
-template class std::vector<art::Ptr<gm2strawtracker::TrackerHitArtRecord> >;
-
-// And for the vector of booleans
-template class std::vector<bool>;
-
-// For FittedTracks 
-// Make a wrapper for just the fitted track, as well as for the collection.
-template class art::Wrapper< gm2strawtracker::FittedTrackArtRecord >;
-template class std::vector< gm2strawtracker::FittedTrackArtRecord >;
-template class art::Wrapper< gm2strawtracker::FittedTrackArtRecordCollection >;
