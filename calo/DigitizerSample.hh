@@ -1,79 +1,50 @@
-#ifndef XtalHit_hh
-#define XtalHit_hh
+#ifndef DigitizerSampleArtRecord_hh
+#define DigitizerSampleArtRecord_hh
 
-/** @file XtalHit.hh
+/** @file DigitizerSampleArtRecord.hh
  
-    Declares the data structures required to store xtal hit
-    information.
+    Implements the digitized samples in art record
  
-    Ported to Art from g2migtrace file xtalHit.hh
-        @author Werner Sun
-        @date 2011
- 
-    @author Robin Bjorkquist
+    @author loreto "pete" alonzi - alonzi@uw.edu
     @date 2013
+
  */
 
-#include "Geant4/G4VHit.hh"
-#include "Geant4/G4THitsCollection.hh"
-#include "Geant4/G4Allocator.hh"
-#include "Geant4/G4ThreeVector.hh"
-#include "Geant4/G4Step.hh"
-#include "Geant4/globals.hh"
+#include <vector>
 
-namespace gm2ringsim{
-/** A G4VHit class to store data from xtal hits. */
-class XtalHit : public G4VHit {
-public:
-    // local coordinates are, respectively:
-    // x() : radial component, positive outward
-    // y() : vertical component, positive up
-    // z() : thickness component, positive downstream
-    
-    // Position and momentum are for charged track at entrance to xtal.
-    G4ThreeVector global_pos, global_mom; // get from prestep pt, which
-    // is in the xtal volume
-    // (isn't it?), and get in the
-    // coordinate system of the
-    // xtal
-    G4ThreeVector local_pos, local_mom;
-    G4double time;
-    G4int turnNum; // obtained from turn counter
-    G4int trackID;
-    G4int parentID; // id of e+/e- that originates shower; can be same as trackID
-    G4int caloNum;
-    G4int xtalNum;
-    G4double energy ;      // total energy of charged track
-    G4double energyDep ;   // total energy deposited by charged track
-    G4double trackLength ; // total path length of charged track
-    G4int pdgID ;
-    G4int nphoton ;
-    G4double ephoton ;
-    
-    XtalHit(G4Step*, G4int trackInitiatingShower);
-    
-    inline void* operator new(size_t);
-    inline void  operator delete(void*);
-    
-    void Draw();
-    void Print();
-    
-};
+namespace gm2dataproducts {
+    struct DigitizerSampleArtRecord {
+        
+        /** Which calorimeter was hit. */
+        int caloNum;
+        
+        /** Which XTAL was hit. */
+        int xtalNum;
+        
+        /** Index of clock tick for sample */
+        int time;
+        
+        /** voltage of sample 12-bit in real life but
+	    we are using a 16-bit structure. Take care
+	    to only use first 12 bits.*/
+        short int voltage;
+        
+        DigitizerSampleArtRecord() :
+        caloNum(0), xtalNum(0), time(0), voltage(0.)
+        {}
+        
+        virtual ~DigitizerSampleArtRecord(){};
+        
+        // ROOT doesn't need to know the rest
+#ifndef __GCCXML__
+      DigitizerSampleArtRecord(int cn, int xn, int time,float v) :
+        caloNum(cn), xtalNum(xn), time(time), voltage(v)
+       {}
+#endif // __GCCXML__
 
-typedef G4THitsCollection<XtalHit> XtalHitsCollection;
-extern G4Allocator<XtalHit> XtalHitAllocator;
-} // namespace gm2ringsim
+    }; //end of DigitizerSampleArtRecord struct
+    
+    typedef std::vector<DigitizerSampleArtRecord> DigitizerSampleArtRecordCollection;
+} // end namespace gm2dataproducts
 
-inline void* gm2ringsim::XtalHit::operator new(size_t)
-{
-    void *aHit;
-    aHit = (void *) XtalHitAllocator.MallocSingle();
-    return aHit;
-}
-
-inline void gm2ringsim::XtalHit::operator delete(void *aHit)
-{
-    XtalHitAllocator.FreeSingle ((XtalHit*) aHit);
-}
-
-#endif // XtalHit_hh
+#endif // DigitizerSampleArtRecord_hh
