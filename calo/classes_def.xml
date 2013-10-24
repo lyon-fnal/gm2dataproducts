@@ -1,34 +1,9 @@
 <!--  art::Wrapper lines need only top level data product objects  -->
 
 <lcgdict>
-    <!-- For WireID - note that using the typedef will not work here-->
-    <class name="gm2strawtracker::WireID"/>
-    <class name="std::vector< gm2strawtracker::WireID >"/>
+    <!-- For DigitizerSamples - note that using the typedef will not work here-->
+    <class name="gm2dataproducts::DigitizerSampleArtRecord"/>
+    <class name="std::vector< gm2dataproducts::DigitizerSampleArtRecord >"/>
+    <class name="art::Wrapper< std::vector< gm2dataproducts::DigitizerSampleArtRecord > >"/>
 
-    <!-- For TrackerHits - note that using the typedef will not work here-->
-    <class name="gm2strawtracker::TrackerHitArtRecord"/>
-    <class name="std::vector< gm2strawtracker::TrackerHitArtRecord >"/>
-    <class name="art::Wrapper< std::vector< gm2strawtracker::TrackerHitArtRecord > >"/>
-
-    <!-- For ValueWithError - note that using the typedef will not work here-->
-    <class name="gm2strawtracker::ValueWithError"/>
-
-    <!-- For HelixParameters - note that using the typedef will not work here-->
-    <class name="gm2strawtracker::HelixParameters"/>
-
-    <!-- For LineParameters - note that using the typedef will not work here-->
-    <class name="gm2strawtracker::LineParameters"/>
-    
-    <!-- For the vector of Ptrs - note that using the typedef will not work here-->
-    <class name="art::Ptr<gm2strawtracker::TrackerHitArtRecord>"/>
-    <class name="std::vector<art::Ptr<gm2strawtracker::TrackerHitArtRecord> >"/>
-
-    <!-- For the vector of booleans -->
-    <class name="std::vector<bool>"/>
-
-    <!-- For FittedTracks - note that using the typedef will not work here-->
-    <class name="gm2strawtracker::FittedTrackArtRecord"/>
-    <class name="art::Wrapper< gm2strawtracker::FittedTrackArtRecord >"/>
-    <class name="std::vector< gm2strawtracker::FittedTrackArtRecord >"/>
-    <class name="art::Wrapper< std::vector< gm2strawtracker::FittedTrackArtRecord > >"/>
 </lcgdict>
