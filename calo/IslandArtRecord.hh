@@ -37,7 +37,7 @@ namespace gm2dataproducts {
         
         // ROOT doesn't need to know the rest
 #ifndef __GCCXML__
-      IslandArtRecord(int cn, int xn, int time,std::vectgor<short int> v) :
+      IslandArtRecord(int cn, int xn, int time,std::vector<short int> v) :
         caloNum(cn), xtalNum(xn), time(time), voltage(v)
        {}
 #endif // __GCCXML__
