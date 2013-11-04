@@ -21,7 +21,7 @@ namespace gm2dataproducts {
         /** Which XTAL was hit. */
         int xtalNum;
         
-        /** Index of clock tick for sample */
+        /** Index of clock tick for start of island */
         int time;
         
         /** voltage vector, the length is variable
