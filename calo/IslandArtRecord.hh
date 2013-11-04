@@ -24,9 +24,11 @@ namespace gm2dataproducts {
         /** Index of clock tick for sample */
         int time;
         
-        /** voltage of sample 12-bit in real life but
-	    we are using a 16-bit structure. Take care
-	    to only use first 12 bits.*/
+        /** voltage vector, the length is variable
+	    but quantized. The quanta (L) is a 
+	    characteristic pulse length. The number (n) of
+	    them that appear in the vector is a decision
+	    made by the "island chopper".*/
       std::vector<short int> voltage;
         
         IslandArtRecord() :
