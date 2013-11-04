@@ -13,38 +13,38 @@
 #include <vector>
 
 namespace gm2dataproducts {
-  struct IslandArtRecord {
-    
-    /** Which calorimeter was hit. */
-    int caloNum;
-    
-    /** Which XTAL was hit. */
-    int xtalNum;
-    
-    /** Index of clock tick for sample */
-    int time;
-    
-    /** voltage vector for the island. length is variable
-	but we restrict it to be some multiple (n) of
-	the characteristic pulse length (L).*/
-    std::vector<short int> voltage;
-    
-    IslandArtRecord() :
-      caloNum(0), xtalNum(0), time(0)
-    {}
-    
-    virtual ~IslandArtRecord(){};
-    
-    // ROOT doesn't need to know the rest
+    struct IslandArtRecord {
+        
+        /** Which calorimeter was hit. */
+        int caloNum;
+        
+        /** Which XTAL was hit. */
+        int xtalNum;
+        
+        /** Index of clock tick for sample */
+        int time;
+        
+        /** voltage of sample 12-bit in real life but
+	    we are using a 16-bit structure. Take care
+	    to only use first 12 bits.*/
+        short int voltage;
+        
+        IslandArtRecord() :
+        caloNum(0), xtalNum(0), time(0), voltage(0.)
+        {}
+        
+        virtual ~IslandArtRecord(){};
+        
+        // ROOT doesn't need to know the rest
 #ifndef __GCCXML__
-    IslandArtRecord(int cn, int xn, int time,std::vector<short int> v) :
-      caloNum(cn), xtalNum(xn), time(time), voltage(v)
-    {}
+      IslandArtRecord(int cn, int xn, int time,float v) :
+        caloNum(cn), xtalNum(xn), time(time), voltage(v)
+       {}
 #endif // __GCCXML__
+
+    }; //end of IslandArtRecord struct
     
-  }; //end of IslandArtRecord struct
-  
-  typedef std::vector<IslandArtRecord> IslandArtRecordCollection;
+    typedef std::vector<IslandArtRecord> IslandArtRecordCollection;
 } // end namespace gm2dataproducts
 
 #endif // IslandArtRecord_hh
