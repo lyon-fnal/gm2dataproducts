@@ -3,7 +3,7 @@
 
 /** @file IslandArtRecord.hh
  
-    Implements the digitized samples in art record
+    Implements the T-Method waveform islands in art record
  
     @author loreto "pete" alonzi - alonzi@uw.edu
     @date 2013
@@ -15,13 +15,13 @@
 namespace gm2dataproducts {
     struct IslandArtRecord {
         
-        /** Which calorimeter was hit. */
+        /** calorimeter ID */
         int caloNum;
         
-        /** Which XTAL was hit. */
+        /** crystal ID */
         int xtalNum;
         
-        /** Index of clock tick for start of island */
+        /** clock tick for start of island */
         int time;
         
         /** voltage vector, the length is variable
