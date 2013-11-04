@@ -6,4 +6,9 @@
     <class name="std::vector< gm2dataproducts::DigitizerSampleArtRecord >"/>
     <class name="art::Wrapper< std::vector< gm2dataproducts::DigitizerSampleArtRecord > >"/>
 
+    <!-- For Island - note that using the typedef will not work here-->
+    <class name="gm2dataproducts::IslandArtRecord"/>
+    <class name="std::vector< gm2dataproducts::IslandArtRecord >"/>
+    <class name="art::Wrapper< std::vector< gm2dataproducts::IslandArtRecord > >"/>
+
 </lcgdict>

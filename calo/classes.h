@@ -4,8 +4,8 @@
 
 #include <vector>
 #include "art/Persistency/Common/Wrapper.h"
-
 #include "DigitizerSampleArtRecord.hh"
+#include "IslandArtRecord.hh"
 
 
 // For Digitizer Sample
@@ -13,4 +13,10 @@
 template class std::vector< gm2dataproducts::DigitizerSampleArtRecord >;
 // Template the wrapper for the vector (typedef okay)
 template class art::Wrapper< gm2dataproducts::DigitizerSampleArtRecordCollection >;
+
+// For Island
+// Template the vector (no typedef)
+template class std::vector< gm2dataproducts::IslandArtRecord >;
+// Template the wrapper for the vector (typedef okay)
+template class art::Wrapper< gm2dataproducts::IslandArtRecordCollection >;
 
