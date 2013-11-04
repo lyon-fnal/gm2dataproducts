@@ -27,17 +27,17 @@ namespace gm2dataproducts {
         /** voltage of sample 12-bit in real life but
 	    we are using a 16-bit structure. Take care
 	    to only use first 12 bits.*/
-        short int voltage;
+      std::vector<short int> voltage;
         
         IslandArtRecord() :
-        caloNum(0), xtalNum(0), time(0), voltage(0.)
+        caloNum(0), xtalNum(0), time(0)
         {}
         
         virtual ~IslandArtRecord(){};
         
         // ROOT doesn't need to know the rest
 #ifndef __GCCXML__
-      IslandArtRecord(int cn, int xn, int time,float v) :
+      IslandArtRecord(int cn, int xn, int time,std::vectgor<short int> v) :
         caloNum(cn), xtalNum(xn), time(time), voltage(v)
        {}
 #endif // __GCCXML__
