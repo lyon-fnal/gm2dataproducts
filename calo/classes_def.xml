@@ -13,7 +13,7 @@
 
     <!-- For CrystalFitResult - note that using the typedef will not work here-->
     <class name="gm2dataproducts::CrystalFitResultArtRecord"/>
-    <class name="std::vector< gm2dataproducts::CrystalFitResultsArtRecord >"/>
+    <class name="std::vector< gm2dataproducts::CrystalFitResultArtRecord >"/>
     <class name="art::Wrapper< std::vector< gm2dataproducts::CrystalFitResultArtRecord > >"/>
 
 </lcgdict>
