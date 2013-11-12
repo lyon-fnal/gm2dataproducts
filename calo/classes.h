@@ -22,6 +22,6 @@ template class art::Wrapper< gm2dataproducts::IslandArtRecordCollection >;
 
 // For Crystal Fit
 // Template the vector (no typedef)
-template class std::vector< gm2dataproducts::CrystalFitResult >;
+template class std::vector< gm2dataproducts::CrystalFitResultArtRecord >;
 // Template the wrapper for the vector (typedef okay)
-template class art::Wrapper< gm2dataproducts::CrystalFitResult >;
+template class art::Wrapper< gm2dataproducts::CrystalFitResultArtRecordCollection >;
