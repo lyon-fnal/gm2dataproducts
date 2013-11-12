@@ -1,9 +1,9 @@
-#ifndef IslandArtRecord_hh
-#define IslandArtRecord_hh
+#ifndef CrystalFitResultArtRecord_hh
+#define CrystalFitResultArtRecord_hh
 
-/** @file IslandArtRecord.hh
+/** @file CrystalFitResultArtRecord.hh
  
-    Implements the T-Method waveform islands in art record
+    Implements the T-Method waveform fit results in art record
  
     @author loreto "pete" alonzi - alonzi@uw.edu
     @date 2013
@@ -11,42 +11,48 @@
  */
 
 #include <vector>
+#include "IslandArtRecord.hh"
 
 namespace gm2dataproducts {
-    struct IslandArtRecord {
-        
-        /** calorimeter ID */
-        int caloNum;
-        
-        /** crystal ID */
-        int xtalNum;
-        
-        /** clock tick for start of island */
-        int time;
-        
-        /** voltage vector, the length is variable
-	    but quantized. The quanta (L) is a 
-	    characteristic pulse length. The number (n) of
-	    them that appear in the vector is a decision
-	    made by the "island chopper".*/
-      std::vector<short int> voltage;
-        
-        IslandArtRecord() :
-        caloNum(0), xtalNum(0), time(0)
-        {}
-        
-        virtual ~IslandArtRecord(){};
-        
-        // ROOT doesn't need to know the rest
-#ifndef __GCCXML__
-      IslandArtRecord(int cn, int xn, int time,std::vector<short int> v) :
-        caloNum(cn), xtalNum(xn), time(time), voltage(v)
-       {}
-#endif // __GCCXML__
-
-    }; //end of IslandArtRecord struct
+  struct CrystalFitResultArtRecord {
     
-    typedef std::vector<IslandArtRecord> IslandArtRecordCollection;
+    /** calorimeter ID */
+    int caloNum;
+    
+    /** crystal ID */
+    int xtalNum;
+    
+    /** fitted energy */
+    float energy;
+
+    /** fitted time */
+    float time;
+
+    /** pedestal */
+    float pedestal; 
+
+    /** quality of fit */
+    float fitQuality;
+
+    /** PTR to parent Island */
+    art::Ptr< IslandArtRecord > parentIsland;        
+        
+    CrystalFitResultArtRecord() :
+      caloNum(0),xtalNum(0),energy(0),time(0),pedestal(0),fitQuality(0)
+    {}
+        
+        virtual ~CrystalFitResultArtRecord(){};
+        
+    // ROOT doesn't need to know the rest
+#ifndef __GCCXML__
+    CrystalFitResultArtRecord(int cn, int xn, float e, float t,float ped,float Q,art::Ptr<IslandArtRecord> I) :
+      caloNum(cn), xtalNum(xn), energy(e), time(t), pedestal(ped),fitQuality(Q),parentIsland(I)
+    {}
+#endif // __GCCXML__
+    
+  }; //end of CrystalFitResultArtRecord struct
+  
+  typedef std::vector<CrystalFitResultArtRecord> CrystalFitResultArtRecordCollection;
 } // end namespace gm2dataproducts
 
-#endif // IslandArtRecord_hh
+#endif // CrystalFitResultArtRecord_hh
