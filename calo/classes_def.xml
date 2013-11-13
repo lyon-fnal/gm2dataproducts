@@ -18,5 +18,11 @@
     <class name="art::Wrapper< std::vector< gm2dataproducts::CrystalFitResultArtRecord > >"/>
     <class name="art::Ptr< gm2dataproducts::CrystalFitResultArtRecord  >"/>
 
+    <!-- For Cluster - note that using the typedef will not work here-->
+    <class name="gm2dataproducts::ClusterArtRecord"/>
+    <class name="std::vector< gm2dataproducts::ClusterArtRecord >"/>
+    <class name="art::Wrapper< std::vector< gm2dataproducts::ClusterArtRecord > >"/>
+    <class name="art::Ptr< gm2dataproducts::ClusterArtRecord  >"/>
+
 </lcgdict>
 

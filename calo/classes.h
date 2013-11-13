@@ -29,3 +29,11 @@ template class std::vector< gm2dataproducts::CrystalFitResultArtRecord >;
 template class art::Wrapper< gm2dataproducts::CrystalFitResultArtRecordCollection >;
 // Template the putter
 template class art::Ptr<gm2dataproducts::CrystalFitResultArtRecord>;
+
+// For Cluster
+// Template the vector (no typedef)
+template class std::vector< gm2dataproducts::ClusterArtRecord >;
+// Template the wrapper for the vector (typedef okay)
+template class art::Wrapper< gm2dataproducts::ClusterArtRecordCollection >;
+// Template the putter
+template class art::Ptr<gm2dataproducts::ClusterArtRecord>;
