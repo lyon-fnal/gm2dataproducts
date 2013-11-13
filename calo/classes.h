@@ -6,7 +6,7 @@
 #include "art/Persistency/Common/Wrapper.h"
 #include "DigitizerSampleArtRecord.hh"
 #include "IslandArtRecord.hh"
-#include "CrystalFitResult.hh"
+#include "CrystalFitResultArtRecord.hh"
 
 // For Digitizer Sample
 // Template the vector (no typedef)
