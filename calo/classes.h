@@ -19,11 +19,13 @@ template class art::Wrapper< gm2dataproducts::DigitizerSampleArtRecordCollection
 template class std::vector< gm2dataproducts::IslandArtRecord >;
 // Template the wrapper for the vector (typedef okay)
 template class art::Wrapper< gm2dataproducts::IslandArtRecordCollection >;
+// Template the putter
+template class art::Ptr< gm2dataproducts::IslandArtRecordCollection >;
 
 // For Crystal Fit
 // Template the vector (no typedef)
 template class std::vector< gm2dataproducts::CrystalFitResultArtRecord >;
 // Template the wrapper for the vector (typedef okay)
 template class art::Wrapper< gm2dataproducts::CrystalFitResultArtRecordCollection >;
-// Template the wrapper for the putter
+// Template the putter
 template class art::Ptr<gm2dataproducts::CrystalFitResultArtRecord>;
