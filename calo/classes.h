@@ -7,6 +7,7 @@
 #include "DigitizerSampleArtRecord.hh"
 #include "IslandArtRecord.hh"
 #include "CrystalFitResultArtRecord.hh"
+#include "ClusterArtRecord.hh"
 
 // For Digitizer Sample
 // Template the vector (no typedef)

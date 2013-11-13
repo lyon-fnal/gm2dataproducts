@@ -11,7 +11,7 @@
  */
 
 #include <vector>
-#include "CrystalFitRecordArtRecord.hh"
+#include "CrystalFitResultArtRecord.hh"
 
 namespace gm2dataproducts {
   struct ClusterArtRecord {
@@ -39,8 +39,8 @@ namespace gm2dataproducts {
         
     // ROOT doesn't need to know the rest
 #ifndef __GCCXML__
-    ClusterArtRecord(int cn, float e, float t, float x,float y,float z,std::vector< art::Ptr< CrystalFitResultArtRecord > > pcs) :
-      caloNum(cn),energy(e),time(x),x(x),y(y),z(z),parentCrystals(pcs)
+    ClusterArtRecord(int cn_, float e_, float t_, float x_,float y_,float z_,std::vector< art::Ptr< CrystalFitResultArtRecord > > pcs) :
+      caloNum(cn_),energy(e_),time(t_),x(x_),y(y_),z(z_),parentCrystals(pcs)
     {}
 #endif // __GCCXML__
     
