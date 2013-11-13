@@ -9,6 +9,7 @@
 #include "CrystalFitResultArtRecord.hh"
 #include "ClusterArtRecord.hh"
 
+
 // For Digitizer Sample
 // Template the vector (no typedef)
 template class std::vector< gm2dataproducts::DigitizerSampleArtRecord >;
@@ -30,6 +31,8 @@ template class std::vector< gm2dataproducts::CrystalFitResultArtRecord >;
 template class art::Wrapper< gm2dataproducts::CrystalFitResultArtRecordCollection >;
 // Template the putter
 template class art::Ptr<gm2dataproducts::CrystalFitResultArtRecord>;
+// Template the putter vector
+// template class art::Wrapper< art::PtrVector< gm2dataproducts::CrystalFitResultArtRecord > >;
 
 // For Cluster
 // Template the vector (no typedef)

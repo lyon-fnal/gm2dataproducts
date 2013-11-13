@@ -28,8 +28,8 @@ namespace gm2dataproducts {
     /** coordinates - calorimeter basis*/
     float x,y,z;
 
-    /** PTR to parent Island */
-    std::vector< art::Ptr< CrystalFitResultArtRecord > > parentCrystals;        
+//     /** PTR to parent Island */
+//     art::PtrVector< CrystalFitResultArtRecord  > parentCrystals;        
         
     ClusterArtRecord() :
       caloNum(0),energy(0),time(0),x(0),y(0),z(0)
@@ -39,8 +39,8 @@ namespace gm2dataproducts {
         
     // ROOT doesn't need to know the rest
 #ifndef __GCCXML__
-    ClusterArtRecord(int cn_, float e_, float t_, float x_,float y_,float z_,std::vector< art::Ptr< CrystalFitResultArtRecord > > pcs) :
-      caloNum(cn_),energy(e_),time(t_),x(x_),y(y_),z(z_),parentCrystals(pcs)
+    ClusterArtRecord(int cn_, float e_, float t_, float x_,float y_,float z_ /*,art::PtrVector< CrystalFitResultArtRecord > pcs */) :
+      caloNum(cn_),energy(e_),time(t_),x(x_),y(y_),z(z_)//,parentCrystals(pcs)
     {}
 #endif // __GCCXML__
     
