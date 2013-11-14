@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "art/Persistency/Common/Wrapper.h"
+#include "art/Persistency/Common/PtrVector.h"
 #include "DigitizerSampleArtRecord.hh"
 #include "IslandArtRecord.hh"
 #include "CrystalFitResultArtRecord.hh"
@@ -32,7 +33,9 @@ template class art::Wrapper< gm2dataproducts::CrystalFitResultArtRecordCollectio
 // Template the putter
 template class art::Ptr<gm2dataproducts::CrystalFitResultArtRecord>;
 // Template the putter vector
-// template class art::Wrapper< art::PtrVector< gm2dataproducts::CrystalFitResultArtRecord > >;
+template class std::vector< art::Ptr< gm2dataproducts::CrystalFitResultArtRecord > >;
+//template class art::Wrapper< art::PtrVector< gm2dataproducts::CrystalFitResultArtRecord > >;
+template class art::Wrapper< art::PtrVector< gm2dataproducts::CrystalFitResultArtRecord  > >;
 
 // For Cluster
 // Template the vector (no typedef)

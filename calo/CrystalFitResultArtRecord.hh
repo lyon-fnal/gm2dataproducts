@@ -39,7 +39,7 @@ namespace gm2dataproducts {
         
     CrystalFitResultArtRecord() :
       caloNum(0),xtalNum(0),energy(0),time(0),pedestal(0),fitQuality(0)
-    {}
+    {};
         
         virtual ~CrystalFitResultArtRecord(){};
         
@@ -48,6 +48,12 @@ namespace gm2dataproducts {
     CrystalFitResultArtRecord(int cn, int xn, float e, float t,float ped,float Q,art::Ptr<IslandArtRecord> I) :
       caloNum(cn), xtalNum(xn), energy(e), time(t), pedestal(ped),fitQuality(Q),parentIsland(I)
     {}
+
+    bool operator<( const CrystalFitResultArtRecord& other ) const {
+	// Simply compare the weights
+	return time < other.time;
+	}
+
 #endif // __GCCXML__
     
   }; //end of CrystalFitResultArtRecord struct
