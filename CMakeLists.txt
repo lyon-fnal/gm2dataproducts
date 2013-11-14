@@ -114,7 +114,6 @@ add_subdirectory( strawtracker )
 add_subdirectory( calo )
 
 
-
 # Packaging facility
 include(UseCPack)
 

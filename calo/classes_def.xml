@@ -2,7 +2,7 @@
 
 <lcgdict>
 
-    <!-- For TrackerHits - note that using the typedef will not work here-->
+    <!-- For Clustering - note that using the typedef will not work here-->
     <class name="gm2dataproducts::XtalHitClusterArtRecord"/>
     <class name="std::vector< gm2dataproducts::XtalHitClusterArtRecord >"/>
     <class name="art::Wrapper< std::vector< gm2dataproducts::XtalHitClusterArtRecord > >"/>
@@ -11,4 +11,22 @@
     <class name="std::vector< art::Ptr< gm2ringsim::XtalArtRecord > >"/>
     <class name="art::Wrapper<std::vector<art::Ptr< gm2ringsim::XtalArtRecord > > >"/>
 
+    <!-- For DigitizerSamples - note that using the typedef will not work here-->
+    <class name="gm2dataproducts::DigitizerSampleArtRecord"/>
+    <class name="std::vector< gm2dataproducts::DigitizerSampleArtRecord >"/>
+    <class name="art::Wrapper< std::vector< gm2dataproducts::DigitizerSampleArtRecord > >"/>
+
+    <!-- For Island - note that using the typedef will not work here-->
+    <class name="gm2dataproducts::IslandArtRecord"/>
+    <class name="std::vector< gm2dataproducts::IslandArtRecord >"/>
+    <class name="art::Wrapper< std::vector< gm2dataproducts::IslandArtRecord > >"/>
+    <class name="art::Ptr< gm2dataproducts::IslandArtRecord  >"/>
+
+    <!-- For CrystalFitResult - note that using the typedef will not work here-->
+    <class name="gm2dataproducts::CrystalFitResultArtRecord"/>
+    <class name="std::vector< gm2dataproducts::CrystalFitResultArtRecord >"/>
+    <class name="art::Wrapper< std::vector< gm2dataproducts::CrystalFitResultArtRecord > >"/>
+    <class name="art::Ptr< gm2dataproducts::CrystalFitResultArtRecord  >"/>
+
 </lcgdict>
+
