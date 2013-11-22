@@ -10,7 +10,6 @@
 #include "IslandArtRecord.hh"
 #include "CrystalFitResultArtRecord.hh"
 #include "CaloClusterArtRecord.hh"
-#include "ClusterArtRecord.hh"
 
 
 // For Digitizer Sample
@@ -34,21 +33,21 @@ template class std::vector< gm2dataproducts::CrystalFitResultArtRecord >;
 template class art::Wrapper< gm2dataproducts::CrystalFitResultArtRecordCollection >;
 // Template the putter
 template class art::Ptr<gm2dataproducts::CrystalFitResultArtRecord>;
+template class art::PtrVector<gm2dataproducts::CrystalFitResultArtRecord>;
 
-// for clustering
+// for XtalHit Cluster
 // Template the vector (no typedef)
-template class std::vector< gm2dataproducts::XtalHitClusterArtRecord >;
+template class gm2dataproducts::ClusterArtRecord<gm2ringsim::XtalArtRecord>;
+template class std::vector< gm2dataproducts::ClusterArtRecord<gm2ringsim::XtalArtRecord> >;
 // Template the wrapper for the vector (typedef okay)
 template class art::Wrapper< gm2dataproducts::XtalHitClusterArtRecordCollection >;
 
 template class art::Ptr< gm2ringsim::XtalArtRecord>;
 template class std::vector<art::Ptr< gm2ringsim::XtalArtRecord> >;
-template class art::Wrapper< std::vector<art::Ptr<gm2ringsim::XtalArtRecord> > >;
 
-// For Cluster
+// For CrystalFitCluster
 // Template the vector (no typedef)
-template class std::vector< gm2dataproducts::ClusterArtRecord >;
+template class gm2dataproducts::ClusterArtRecord<gm2dataproducts::CrystalFitResultArtRecord>;
+template class std::vector< gm2dataproducts::ClusterArtRecord<gm2dataproducts::CrystalFitResultArtRecord> >;
 // Template the wrapper for the vector (typedef okay)
-template class art::Wrapper< gm2dataproducts::ClusterArtRecordCollection >;
-// Template the putter
-template class art::Ptr<gm2dataproducts::ClusterArtRecord>;
+template class art::Wrapper< gm2dataproducts::CrystalFitClusterArtRecordCollection >;
