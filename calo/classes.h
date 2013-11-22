@@ -5,10 +5,12 @@
 #include <vector>
 
 #include "art/Persistency/Common/Wrapper.h"
+#include "art/Persistency/Common/PtrVector.h"
 #include "DigitizerSampleArtRecord.hh"
 #include "IslandArtRecord.hh"
 #include "CrystalFitResultArtRecord.hh"
 #include "CaloClusterArtRecord.hh"
+#include "ClusterArtRecord.hh"
 
 
 // For Digitizer Sample
@@ -42,3 +44,11 @@ template class art::Wrapper< gm2dataproducts::XtalHitClusterArtRecordCollection 
 template class art::Ptr< gm2ringsim::XtalArtRecord>;
 template class std::vector<art::Ptr< gm2ringsim::XtalArtRecord> >;
 template class art::Wrapper< std::vector<art::Ptr<gm2ringsim::XtalArtRecord> > >;
+
+// For Cluster
+// Template the vector (no typedef)
+template class std::vector< gm2dataproducts::ClusterArtRecord >;
+// Template the wrapper for the vector (typedef okay)
+template class art::Wrapper< gm2dataproducts::ClusterArtRecordCollection >;
+// Template the putter
+template class art::Ptr<gm2dataproducts::ClusterArtRecord>;
