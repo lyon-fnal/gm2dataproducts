@@ -16,8 +16,7 @@
 
 #include <ostream>
 #include <string>
-
-#include "messagefacility/MessageLogger/MessageLogger.h"
+#include <vector>
 
 // All in the namespace for straw tracking
 namespace gm2strawtracker {
