@@ -5,6 +5,7 @@
 // @date August 2013
 
 #include "WireID.hh"
+#include "messagefacility/MessageLogger/MessageLogger.h"
 
 using gm2strawtracker::WireID;
 using gm2strawtracker::StrawView;
