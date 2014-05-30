@@ -1,6 +1,6 @@
 // This file defines the WireID struct that is used by the tracking analysis
 // framework to identify an individual wire.  Specification for the wire
-// includes tracker number (which scallop it's in) station, view, layer, and
+// includes tracker number (which scallop it's in) module, view, layer, and
 // wire number.
 //
 // For now, it is not a 'smart struct' as suggested in docDB entry 1153 (Data
@@ -32,13 +32,13 @@ namespace gm2strawtracker {
     struct WireID {
         private:
         // Tracker number should range from 0-1 and describes which of the
-        // tracking stations contains this wire: 0 for the one directly opposite
+        // tracking modules contains this wire: 0 for the one directly opposite
         // the inflector, and 1 for the 270 degree one.
         short trackerNumber; 
 
-        // Station number (describes which of the straw station/boxes this wire
+        // Module number (describes which of the straw modules/boxes this wire
         // is in) should range from 0 to around 20 at most.
-        short station;
+        short module;
 
         // View is a member of the StrawView enum and describes whether the
         // wire in question is a u-view or a v-view wire. We still need to
@@ -50,7 +50,7 @@ namespace gm2strawtracker {
         short layer;
 
         // Wire gives the wire number within the previously-specified layer. It
-        // will range from 0-n, depending on the size of the station in
+        // will range from 0-n, depending on the size of the module in
         // question, and wire 0 is (I think?) the one closest to the scallop
         // edge.
         short wire;
@@ -64,7 +64,7 @@ namespace gm2strawtracker {
         // Two other constructors, which ROOT can't see but other classes
         // can.
         // An easy constructor - just pass in all the relevant information
-        WireID(short trackerNumber_in, short station_in, StrawView view_in,
+        WireID(short trackerNumber_in, short module_in, StrawView view_in,
                 short layer_in, short wire_in);
 
         // A copy constructor
@@ -77,8 +77,8 @@ namespace gm2strawtracker {
         inline short getTrackerNumber() const {
             return trackerNumber;
         }
-        inline short getStation() const {
-            return station;
+        inline short getModule() const {
+            return module;
         }
         inline StrawView getView() const {
             return view;
@@ -94,8 +94,8 @@ namespace gm2strawtracker {
         inline void setTrackerNumber(short newValue) {
             trackerNumber = newValue;
         }
-        inline void setStation(short newValue) {
-            station = newValue;
+        inline void setModule(short newValue) {
+            module = newValue;
         }
         inline void setView(StrawView newValue) {
             view = newValue;
