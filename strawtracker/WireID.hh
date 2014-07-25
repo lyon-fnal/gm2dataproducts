@@ -1,6 +1,6 @@
 // This file defines the WireID struct that is used by the tracking analysis
 // framework to identify an individual wire.  Specification for the wire
-// includes tracker number (which scallop it's in) module, view, layer, and
+// includes station number (which scallop it's in) module, view, layer, and
 // wire number.
 //
 // For now, it is not a 'smart struct' as suggested in docDB entry 1153 (Data
@@ -34,7 +34,7 @@ namespace gm2strawtracker {
         // Tracker number should range from 0-1 and describes which of the
         // tracking modules contains this wire: 0 for the one directly opposite
         // the inflector, and 1 for the 270 degree one.
-        short trackerNumber; 
+        short station; 
 
         // Module number (describes which of the straw modules/boxes this wire
         // is in) should range from 0 to around 20 at most.
@@ -64,7 +64,7 @@ namespace gm2strawtracker {
         // Two other constructors, which ROOT can't see but other classes
         // can.
         // An easy constructor - just pass in all the relevant information
-        WireID(short trackerNumber_in, short module_in, StrawView view_in,
+        WireID(short station_in, short module_in, StrawView view_in,
                 short layer_in, short wire_in);
 
         // A copy constructor
@@ -74,8 +74,8 @@ namespace gm2strawtracker {
         // fields is through methods. Names are self-explanatory, and the
         // methods are simple enough to put in here. Should they be inlined?
         // Getters
-        inline short getTrackerNumber() const {
-            return trackerNumber;
+        inline short getStation() const {
+            return station;
         }
         inline short getModule() const {
             return module;
@@ -91,8 +91,8 @@ namespace gm2strawtracker {
         }
 
         // Setters
-        inline void setTrackerNumber(short newValue) {
-            trackerNumber = newValue;
+        inline void setStation(short newValue) {
+            station = newValue;
         }
         inline void setModule(short newValue) {
             module = newValue;

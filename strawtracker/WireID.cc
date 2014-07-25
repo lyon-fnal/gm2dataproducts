@@ -18,7 +18,7 @@ using gm2strawtracker::na_view;
 // The default constructor initializes everything to -1 - set the fields
 // you care about!
 gm2strawtracker::WireID::WireID() :
-    trackerNumber(-1),
+    station(-1),
     module(-1),
     view(na_view),
     layer(-1),
@@ -30,9 +30,9 @@ gm2strawtracker::WireID::WireID() :
 // Two other constructors, which ROOT can't see but other classes
 // can.
 // An easy constructor - just pass in all the relevant information
-gm2strawtracker::WireID::WireID(short trackerNumber_in, short module_in, 
+gm2strawtracker::WireID::WireID(short station_in, short module_in, 
         StrawView view_in, short layer_in, short wire_in)
-: trackerNumber(trackerNumber_in),
+: station(station_in),
     module(module_in),
     view(view_in),
     layer(layer_in),
@@ -41,7 +41,7 @@ gm2strawtracker::WireID::WireID(short trackerNumber_in, short module_in,
 
 // A copy constructor
 gm2strawtracker::WireID::WireID(const WireID& other)
-: trackerNumber(other.trackerNumber),
+: station(other.station),
     module(other.module),
     view(other.view),
     layer(other.layer),
@@ -124,7 +124,7 @@ gm2strawtracker::WireID gm2strawtracker::wireIDfromString(std::string str) {
 
     // Once we reach this point, we appear to have a valid string. Let's now
     // fill the WireID based on the tokens
-    wire.setTrackerNumber(atoi(tokens[0].c_str()));
+    wire.setStation(atoi(tokens[0].c_str()));
     wire.setModule(atoi(tokens[1].c_str()));
     // The view is moderately complicated - I'm hoping to change the
     // printout to actually say 'u' or 'v', rather than '0' or '1'.
@@ -140,11 +140,11 @@ gm2strawtracker::WireID gm2strawtracker::wireIDfromString(std::string str) {
 // namespace that allow other classes to print WireIDs to output streams
 // using the << operator and compare WireIDs using the < operator.
 
-// The printing function for ease of debugging: tracker number ~ module ~
+// The printing function for ease of debugging:  station ~ module ~
 // view ~ layer ~ wire (Use tilde separation instead of '-' in order to
 // avoid confusion with negative numbers)
 std::ostream& gm2strawtracker::operator<<(std::ostream& os, const WireID& id) {
-    os << id.trackerNumber << " ~ " << id.module << " ~ " << id.view
+    os << id.station<< " ~ " << id.module << " ~ " << id.view
         //id.view == u_view ? "u" : (id.view == v_view ? "v" : "na")
         << " ~ " << id.layer << " ~ " << id.wire;
     return os;
@@ -156,8 +156,8 @@ bool gm2strawtracker::operator<(WireID const& left, WireID const& right) {
     // Compare the 'most significant' things first:
     // The order of comparison is tracker number, module, view, layer, and
     // then wire.
-    if (left.trackerNumber != right.trackerNumber) {
-        return left.trackerNumber < right.trackerNumber;
+    if (left.station != right.station) {
+        return left.station < right.station;
     }
     if (left.module != right.module) {
         return left.module < right.module;
