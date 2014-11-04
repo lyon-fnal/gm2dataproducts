@@ -1,63 +1,59 @@
-#  This file is the main CMakeLists.txt file for the @artg4@ package. It is used by the g-2 build system.
-# h2. Introduction 
+# ======================================================================
+#  foo main build file
+#
+# . mrb s
+# mrb b
+# ======================================================================
 
-# h2. Main code
 
-# Ensure we are using a moden version of CMake
-CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
+# use cmake 2.8 or later
+cmake_minimum_required (VERSION 2.8)
 
-# h3. Project definition
+project(gm2dataproducts)
 
-# --> Define the name of this project (replace @gm2artexamples@ with your 
-# project name - use all lowercase)
-PROJECT (gm2dataproducts)
+# cetbuildtools contains our cmake modules
+SET ( CETBUILDTOOLS_VERSION $ENV{CETBUILDTOOLS_VERSION} )
+IF (NOT CETBUILDTOOLS_VERSION)
+MESSAGE (FATAL_ERROR "ERROR: setup cetbuildtools to get the cmake modules")
+ENDIF()
 
-# h3. Load CMake modules
-set( CETBUILDTOOLS_VERSION $ENV{CETBUILDTOOLS_VERSION} )
-if( NOT CETBUILDTOOLS_VERSION )
-  message( FATAL_ERROR "ERROR: setup cetbuildtools to get the cmake modules" )
-endif()
-set( CMAKE_MODULE_PATH $ENV{CETBUILDTOOLS_DIR}/Modules ${CMAKE_MODULE_PATH} )
+set(CMAKE_MODULE_PATH $ENV{ART_DIR}/Modules
+$ENV{CETBUILDTOOLS_DIR}/Modules
+${CMAKE_MODULE_PATH})
 
-# art contains cmake modules that we use
-set( ART_VERSION $ENV{ART_VERSION} )
-if( NOT ART_VERSION )
-  message( FATAL_ERROR "ERROR: setup art to get the cmake modules" )
-endif()
-set( CMAKE_MODULE_PATH $ENV{ART_DIR}/Modules ${CMAKE_MODULE_PATH} )
-
-# Include the necessary macros
 include(CetCMakeEnv)
-include(BuildPlugins)
-include(ArtMake)
-
-# h3. Configure this product
-
-# Configure
 cet_cmake_env()
 
-#set_install_root()
+set_install_root()
 
-# Do the same compiler flag stuff as Art
-cet_set_compiler_flags(DIAGS VIGILANT WERROR 
-   EXTRA_FLAGS -pedantic
-   EXTRA_CXX_FLAGS -std=c++11
+# g-2 wants the product name in the library name
+set (ART_MAKE_PREPEND_PRODUCT_NAME TRUE)
+
+if ( ${APPLE} )
+cet_set_compiler_flags(DIAGS CAUTIOUS
+WERROR
+EXTRA_FLAGS -pedantic
+
 )
+else()
+cet_set_compiler_flags(DIAGS CAUTIOUS
+WERROR
+EXTRA_FLAGS -pedantic
+
+)
+endif()
 
 cet_report_compiler_flags()
 
-
-# Locate some UPS areas (the versions are just minimum required) and setup include paths
-# These are needed for Art stuff
-
-find_ups_product(cetbuildtools v3_13_00)
-find_ups_product(art v1_10_00)
-
-# Make sure we have gcc
-cet_check_gcc()
+# these are minimum required versions, not the actual product versions
+find_ups_product(cetbuildtools v4_03_01)
+find_ups_product(art v1_12_02)
 
 # Macros for art_make and simple plugins
+# macros for dictionary and simple_plugin
 include(ArtDictionary)
+include(ArtMake)
+include(BuildPlugins)
 
 # Build these directories
 add_subdirectory( calo )
